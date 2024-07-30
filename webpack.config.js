@@ -17,11 +17,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        user: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.css$/i,
-        type: 'asset/resource',
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
