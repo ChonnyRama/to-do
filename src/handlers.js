@@ -5,6 +5,7 @@ const render = function () {
     const todoDisplay = document.querySelector('[data-project-todo-container]')
     const todoTemplate = document.getElementById('todo-template');
     const projectTodoTemplate = document.getElementById('project-todo-template');
+    
     const clearElement = (element) => {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
@@ -117,31 +118,11 @@ export const projectHandler = function () {
     const todoDialog = document.querySelector('#todo-prompt');
     const newTodoButton = document.querySelector('[data-new-todo-button]');
     const todoSubmit = document.querySelector('[data-submit-todo]');
-    const projects = [
-        {
-            id: '1',
-            name: "some project",
-            tasks: [{
-                id: "fdwafda",
-                name: "test",
-                description: "some desc",
-                dueDate: "8/2/2024",
-                priority: 'high',
-                complete: false,
-            }]
-        }, {
-            id: '2',
-            name: "some other project",
-            tasks: [{
-                id: "fdwafda",
-                name: "test",
-                description: "some other desc",
-                dueDate: "8/3/2024",
-                priority: 'high',
-                complete: false,
-            }]
-        }];
+    const todoDelete = document.querySelector('[data-delete-todo-button]');
+    const LOCAL_STORAGE_PROJECTS_KEY = 'projects.lists'
 
+    const projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECTS_KEY)) || [];
+    render().renderProjects(projects)
     newProjectDialog.addEventListener("click", () => {
         projectDialog.showModal();
     })
@@ -154,6 +135,7 @@ export const projectHandler = function () {
         projects.push(newProject);
         projectDialog.close();
         document.querySelector('#project-prompt form').reset();
+        save();
         render().renderProjects(projects);
     })
 
@@ -181,12 +163,24 @@ export const projectHandler = function () {
 
     todoSubmit.addEventListener("click", (event) => {
         todoHandler().submitNewTodo(event, projects, selectedProjectId);
+        save();
         render().renderTodos(projects, selectedProjectId);
         render().renderProjects(projects);
     })
 
+    todoDelete.addEventListener("click", (event) => {
+        const currentProject = projects.find(project => project.id === selectedProjectId);
+        if (currentProject.tasks){
+            currentProject.tasks.splice(0,1);
+        }
+        save();
+        render().renderTodos(projects, selectedProjectId);
+        render().renderProjects(projects);
+    })
 
-
+    const save = () => {
+        localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects))
+    }
 
 
 }
@@ -216,3 +210,27 @@ const todoHandler = function () {
 
     return { submitNewTodo }
 }
+
+// {
+//     id: '1',
+//     name: "some project",
+//     tasks: [{
+//         id: "fdwafda",
+//         name: "test",
+//         description: "some desc",
+//         dueDate: "8/2/2024",
+//         priority: 'high',
+//         complete: false,
+//     }]
+// }, {
+//     id: '2',
+//     name: "some other project",
+//     tasks: [{
+//         id: "fdwafda",
+//         name: "test",
+//         description: "some other desc",
+//         dueDate: "8/3/2024",
+//         priority: 'high',
+//         complete: false,
+//     }]
+// }
