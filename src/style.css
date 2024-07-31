@@ -70,8 +70,12 @@ ul li {
     cursor: pointer;
 }
 
-.selected-project {
-    font-weight: bold;
+.project span {
+    font-size: 1.2rem;
+}
+
+.selected-project span {
+    font-weight: 700;
 }
 
 .container .todo-display {
@@ -86,7 +90,7 @@ ul li {
 }
 
 .todo-item {
-    font-size: .9rem;
+    font-size: 1rem;
 }
 
 .todo-container .todo-item label {
@@ -131,4 +135,28 @@ button {
   max-width: 400px;
   top: 40%;
   left: 40%;
+}
+
+#todo-prompt form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    align-items: center;
+}
+
+#todo-prompt form label {
+    text-align: right;
+}
+
+#todo-prompt form input[type="text"],
+#todo-prompt form input[type="date"],
+#todo-prompt form input[type="radio"],
+#todo-prompt form button {
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+#todo-prompt form button {
+    grid-column: span 2; /* Make the submit button span both columns */
+    margin-top: 10px; /* Adjust spacing */
 }

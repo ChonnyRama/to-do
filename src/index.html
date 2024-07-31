@@ -45,27 +45,27 @@
             <button data-new-project-button>New Project</button>
         </nav>
         <div class="todo-display">
-            <div class="todo-title">
-                My First Project
-            </div>
-            <div class="todo-container">
-                <div class="todo-item">
-                    <input type="checkbox" id="task-1" />
-                    <label for="task-1">
-                        <span class="custom-checkbox"></span>
-                        Do the laundry
-                    </label>
-                    <div class="todo-details">
-
-                        <span class="todo-due">7/31/2024</span>
-                        <span class="todo-description"> some description</span>
-                        <span class="todo-priority">High</span>
+            <div data-project-todo-container>
+                <div class="todo-title">
+                    My First Project
+                </div>
+                <div class="todo-container">
+                    <div class="todo-item">
+                        <input type="checkbox" id="task-1" />
+                        <label for="task-1">
+                            <span class="custom-checkbox"></span>
+                            Do the laundry
+                        </label>
+                        <div class="todo-details">
+                            <span class="todo-due">7/31/2024</span>
+                            <span class="todo-description"> some description</span>
+                            <span class="todo-priority">High</span>
+                        </div>
                     </div>
                 </div>
-                <button class="new-task">New Todo</button>
             </div>
+            <button data-new-todo-button>New Todo</button>
         </div>
-
     </div>
     <dialog id="project-prompt">
         <form method="dialog">
@@ -84,14 +84,40 @@
             <input type="date" name="due-date" id="due-date">
 
             <label for="priority1">Urgent</label>
-            <input type="radio" name="priority" value="urgent">
+            <input type="radio" name="priority" value="high">
             <label for="priority2">Important</label>
-            <input type="radio" name="priority" value="important">
+            <input type="radio" name="priority" value="medium">
             <label for="priority3">Less Important</label>
-            <input type="radio" name="priority" value="less-important">
-            <button>Submit</button>
+            <input type="radio" name="priority" value="low">
+            <button data-submit-todo>Submit</button>
         </form>
     </dialog>
+    <template id="todo-template">
+        <div class="todo-container">
+            <div class="todo-item">
+                <input type="checkbox"/>
+                <label for="task-1">
+                    <span class="custom-checkbox"></span>
+                </label>
+                <div class="todo-details">
+
+                    <span class="todo-due"></span>
+                    <span class="todo-description"> </span>
+                    <span class="todo-priority"></span>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="project-todo-template">
+        <li>
+            <div class="todo-item">
+                <input type="checkbox" id="task-1" />
+                <label for="task-1">
+                    <span class="custom-checkbox"></span>
+                </label>
+            </div>
+        </li>
+    </template>
 </body>
 
 </html>
